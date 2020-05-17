@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{username}} Profile</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h1> You don't have access to {{user.username}}'s profile. </h1>
+    <form action="{% url 'profile' user.id %}" method="post">
+        {% csrf_token %}
+        
+         <button type="submit">Send a friend request to {{user.username}}</button>
+         </form>
+        
+    
+    {% if requested %}
+        <h1> You have already sent a request to this user. </h1>
+    {% endif %}
+
+    
+</body>
+</html>
