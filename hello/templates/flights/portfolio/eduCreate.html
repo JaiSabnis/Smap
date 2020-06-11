@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Add Education</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'styles/style.css' %}"
+    />
+  </head>
+  <body>
+    <h1>{{username}}</h1>
+
+    {% if message %}
+    <div>
+      {{ message }}
+    </div>
+    {% endif %}
+    <form action="{% url 'eduCreate' %}" method="post">
+      {% csrf_token %}
+      <h2>Education Details</h2>
+
+      <h3>School/College/University Name:</h3>
+      <input name="school" type="text" placeholder="School/Collge/University" />
+      <h3>Degree:</h3>
+      <input name="degree" type="text" placeholder="Degree" />
+      <h3>Field of study:</h3>
+      <input name="field" type="text" placeholder="Area of Study" />
+      <h3>Description (Optional):</h3>
+      <input name="about" type="text" placeholder="Description" />
+
+      <input type="submit" value="Add Education" />
+    </form>
+
+    <a href="{% url 'myprofile'%}">Go back</a>
+  </body>
+</html>

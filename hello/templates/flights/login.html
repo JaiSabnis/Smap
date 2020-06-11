@@ -1,25 +1,93 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Login</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
-<body>
-<h1>Login</h1>
-{% if message %}
-    <div>
-        {{ message }}
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>PlantBuddy Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap css -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap javascript -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'styles/style.css' %}"
+    />
+    <link rel="icon" href="favicon.ico" />
+    <!-- Custom icons -->
+    <script
+      src="https://kit.fontawesome.com/11fafd664d.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container-fluid login-container">
+      <h1>Login</h1>
+      <h4>Welcome to smap.space!</h4>
+      <p>Please sign in to continue.</p>
+
+      {% if message %}
+      <h4 style="color: crimson;">
+        {{message}} If your a new user, register here
+      </h4>
+      <a href="{% url 'register'%}"></a>
+      {%endif%}
+
+      <form action="{% url 'login' %} " method="post">
+        {% csrf_token %}
+        <input
+          name="username"
+          type="text"
+          class="inputBox"
+          placeholder="Username"
+        />
+        <input
+          name="password"
+          type="password"
+          class="inputBox"
+          placeholder="Password"
+        />
+        <div>
+          <button type="submit" name="submit" class="loginButton">
+            Log in
+          </button>
+        </div>
+        <a href="{% url 'register' %}">
+          Don't have an account? Register here!</a
+        >
+      </form>
     </div>
-{% endif %}
-<form action="{% url 'login' %} " method="post">
-    {% csrf_token %}
-    <input name="username" type="text" placeholder="Username"/>
-    <input name="password" type="password" placeholder="Password"/>
-    <input type="submit" value="Login"/>
-</form>
-<a href="{% url 'register'%}"> Don't have an account? Register here!</a>
-    
-</body>
+  </body>
 </html>

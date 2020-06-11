@@ -1,0 +1,290 @@
+/* General */
+@font-face {
+  font-family: kiss;
+  src: url("Raleway-Light.ttf");
+}
+
+@font-face {
+  font-family: boldboi;
+  src: url("boldeen.ttf");
+}
+
+body {
+  text-align: center;
+  font-family: kiss, sans-serif;
+  background-color: whitesmoke;
+  color: black;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #11998e;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+/* Login page */
+
+.inputBox {
+  width: 90%;
+  color: rgb(10, 10, 10);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: linear-gradient(to right, rgb(246, 247, 247), rgb(253, 250, 252));
+  padding: 10px 20px;
+  border-color: black;
+  border-radius: 20px;
+  outline: none;
+  align-content: center;
+  box-sizing: border-box;
+  border: 5px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 10px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+section {
+  overflow-y: scroll;
+  scroll-behavior: smooth; /* <----- THE SECRET ---- */
+}
+
+.loginButton {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, rgb(39, 176, 165), rgb(86, 251, 64));
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  width: 76%;
+  font-size: 13px;
+  margin-bottom: 5%;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.yellowButton {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, rgb(250, 213, 2), rgb(251, 192, 64));
+  border: 0;
+  font-family: sans-serif;
+  font-weight: bolder;
+  text-shadow: 2px 2px #131312;
+  width: 40%;
+  height: 50px;
+  font-size: 26px;
+  margin-top: 5%;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 500px) {
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 500px) {
+}
+
+.welcome {
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bolder;
+  font-size: 10vw;
+  padding-top: 10%;
+  text-shadow: 5px 5px #bd945f;
+}
+
+.orgBox {
+  background-image: url("images/org.jpg");
+  height: 450px;
+  width: 100%;
+  background-size: cover;
+}
+
+.curvybox {
+  background-color: #ffffff;
+  width: 400px;
+  height: 400px;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+/* Containers */
+.login-container {
+  margin: 80px auto;
+  height: 550px;
+  width: 400px;
+}
+
+/* Registration page */
+
+.registration-container {
+  padding: 4% 19% 4% 8%;
+  margin: 8% auto 5%;
+}
+
+.registration-icon {
+  position: relative;
+  top: 20%;
+  margin-bottom: 80px;
+}
+
+.consent-tick {
+  text-align: left;
+}
+
+.registration-buttons {
+  margin-top: 3%;
+}
+
+/* createProfile page */
+.profile-container {
+  padding: 7% 10%;
+}
+
+.list-group .active {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+/* New plant page */
+.newplant-container {
+  padding: 7% 10%;
+  margin-top: 5%;
+}
+
+.seed-icon {
+  width: 300px;
+}
+
+/* Index page */
+/* Navbar */
+.navbar {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-item {
+  padding: 0 10px;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.index-container {
+  padding: 0;
+}
+
+/* The plantBuddy panels (request+friends) */
+.panels {
+  margin-top: 10 px;
+  width: 90%;
+  margin: 5px auto;
+}
+
+/* Buddy profile page */
+.buddy-profile {
+  width: 70%;
+  margin: 5% auto;
+  text-align: left;
+}
+
+.buddy-bio {
+  margin-top: 5%;
+}
+
+.buddy-plants {
+  width: 70%;
+  margin: 5% auto;
+}
+
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Plant page */
+.plant-profile {
+  width: 70%;
+  margin: 10% auto;
+}
+
+/* Discussion(postDisplay) page */
+.discussion-box {
+  width: 70%;
+  margin: 5% auto;
+}
+
+.comment {
+  text-align: left;
+}

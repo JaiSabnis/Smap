@@ -1,32 +1,67 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Create Profile</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
-<body>
-    <h1> {{username}}</h1> 
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'styles/style.css' %}"
+    />
+  </head>
+  <body>
+    <h1>{{username}}</h1>
 
     <h1>Profile</h1>
     {% if message %}
-        <div>
-            {{ message }}
-        </div>
+    <div>
+      {{ message }}
+    </div>
     {% endif %}
-    <form action="{% url 'myprofile' %}" method="post">
-        {% csrf_token %}
-        <h3> First name: </h3><h5> {{first}}</h5>
-        <input name="first" type="text" placeholder="First name"/>
-        <h3> Last name: </h3><h5> {{last}}</h5>
-        <input name="last" type="text" placeholder="Last name"/>
-        <h3> Your Bio: </h3><h5> {{bio}}</h5>
-        <input name="bio" type="text" placeholder="Your Bio"/>
-        <h3> Date of birth: </h3><h5> {{date}}</h5>
-        <input name="date" type="date" placeholder="Date of Birth"/>
-        <input type="submit" value="Apply Changes"/>
+    <form
+      class="form__group field"
+      action="{% url 'myprofile' %}"
+      method="post"
+    >
+      {% csrf_token %}
+      <input
+        type="input"
+        class="form__field"
+        placeholder="Full Name"
+        name="first"
+      />
+      <label for="name" class="form__label">Name</label>
+      <input
+        type="input"
+        class="form__field"
+        placeholder="About you"
+        name="bio"
+      />
+      <label for="name" class="form__label">Name</label>
+
+      <h3>First name:</h3>
+      <input name="first" type="text" placeholder="First name" />
+      <h3>Last name:</h3>
+      <input name="last" type="text" placeholder="Last name" />
+      <h3>:</h3>
+      <input name="bio" type="text" placeholder="Your Bio" />
+      <h3>Date of birth:</h3>
+      <input name="date" type="date" placeholder="Date of Birth" />
+
+      <input type="submit" value="Create Profolio" />
     </form>
-    
-</body>
+  </body>
 </html>
