@@ -1,135 +1,131 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{user.username}} Profile</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'styles/style.css' %}"
-    />
-  </head>
-  <body>
-    <img src="{{profile.displayPic.image.url}}" width="240" />
-    <h1>{{profile.first}} {{profile.last}}</h1>
-    <h3>{{user.email}}</h3>
 
-    <nav class="quickNav">
-      <ul class="pagination pagination-lg justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="{% url 'myprofile'%}" tabindex="-1">
-            About
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#edu"> Education</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#work"> Work Experience</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="{% url 'myportfolio'%}">
-            Projects and Acheivements</a
-          >
-        </li>
-      </ul>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title> Smap </title>
+
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <!-- Bootstrap javascript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <!-- Custom css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
+  <link rel="icon" href="favicon.ico">
+  <!-- Custom icons -->
+  <script src="https://kit.fontawesome.com/11fafd664d.js" crossorigin="anonymous"></script>
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body style="background-color: rgb(221, 203, 36); background-image: url({% static "images/back4.jpg" %})">
+
+  <nav class="navbar navbar-light bg-light" >
+    <a class="navbar-brand">Smap</a> 
+    <button onclick="location.href='{% url 'logout' %}';" class="btn btn-outline-danger" style="margin-left: 20%" > Log Out </button>
+
+    <form class="form-inline" action="{% url 'index' %}" method="post">
+
+      <input name="username" class="form-control mr-sm-2" type="search" placeholder="Username/Organisation" style="margin-bottom: 4px;">
+      {% csrf_token %}
+      <button class="btn btn-success" style="margin-right: 5px;" type="submit">Search</button>
+    </form>
+    <button onclick="location.href='{% url 'myprofile' %}';" class="btn btn-warning" > Your Profile </button>
+
+
     </nav>
 
-    <p>Bio: {{profile.bio}}</p>
 
-    <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModalCenter"
-    >
-      Launch demo modal
-    </button>
+<!---
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black">
+      <a class="navbar-brand" href="{% url 'index' %}> getOfficial</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModalCenter"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">
-              Modal title
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="{% url 'myprofile' %}">Profile <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <form class="form-inline my-2 my-lg-0" action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <input name="username" class="form-control mr-sm-2" type="search" placeholder="Username" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Find</button>
+          </form>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+  -->
+
+
+
+
+    <ul>
+      {% for user in users %}
+      <li>
+        <a href="{% url 'profile' user.id%}">{{user.username}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+
+
+  </div>
+ 
+   <h1 class="welcome">Welcome, {{user.username}}</h1>
+
+
+  <div class="panels"> 
+    <br>
+    <br>
+    <h1 style="color: darkorange; font-weight: bold;"> Ad-free websites in seconds </h1>
+    <h5 style="color: rgb(0, 0, 0);"> Create incredible webpages for yourself or your organisation that can be converted into advertisements and social media
+      posts with one click. Simply fill in the details of your site based on what features you need. Get a concise sharable url to share your completely ad-free webpage </h5>
+    <br>
+    <br>
+
+  <div class="card-deck">
+    <div class="card" >
+      <img class="card-img-top" src="{% static "images/person.jpg" %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Personal Smap space</h5>
+        <div class="card-text">
+          Brand yourself and your interests with an ad-free webspaces that can be converted to a resume, posters and social media posts with just a click.
         </div>
+        <button onclick="location.href='{% url 'myprofile' %}';" class="btn btn-warning" style="margin-top: 20px;"> Get Started! </button>
+      </div>
+     
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="{% static "images/org.jpg" %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Smap space for Groups/Organisations</h5>
+        <div class="card-text">
+            Take your food stall, soccer team, community group and more online with ad-free webspaces which can be converted to posters or social media posts </div>
+        <button onclick="location.href='{% url 'index' %}';" class="btn btn-warning" style="margin-top: 20px;"> Get Started! </button>
       </div>
     </div>
+  </div>
+  
 
-    <section>
-      <h2 id="edu">Education</h2>
+</body>
 
-      {% for education in educations %}
-
-      <h2>
-        {{education.school}} <a href="{% url 'eduEdit' education.id %}">Edit</a>
-      </h2>
-      <h3>{{education.degree}}</h3>
-      <h2>{{education.field}}</h2>
-      <p>{{education.about}}</p>
-
-      {% endfor %}
-
-      <a href="{% url 'eduCreate'%}"> <h3>Add new Education details</h3></a>
-
-      <h2 id="work">Work Experience</h2>
-
-      {% for work in works %}
-
-      <h1>{{work.company}} <a href="{% url 'workEdit' work.id %}">Edit</a></h1>
-      <h3>{{work.title}}</h3>
-      <p>{{work.about}}</p>
-
-      {% endfor %}
-
-      <a href="{% url 'workCreate'%}"> <h3>Add new Work Experience</h3></a>
-    </section>
-  </body>
 </html>
+
+

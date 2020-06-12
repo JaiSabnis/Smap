@@ -43,7 +43,7 @@ class Profile(models.Model):
    projects = models.ManyToManyField(Project, related_name="projects", blank=True)
    friendRequests = models.ManyToManyField(User, related_name="friendRequests", blank=True)
    friends = models.ManyToManyField(User, related_name="friends", blank=True)
-   displayPic = models.ImageField(upload_to='displayPics', blank=True)
+#  displayPic = models.ImageField(upload_to='displayPics', blank=True)
    def __str__(self):
        return f"{self.first} {self.last}"
 
