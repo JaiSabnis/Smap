@@ -26,17 +26,14 @@ class Skill(models.Model):
 class Work(models.Model):
     company = models.CharField(max_length=100, blank=False)
     title = models.CharField(max_length=100, blank=False)
-    ongoing = models.BooleanField(blank=True)
     about = models.CharField(max_length=500, blank=True)
     def __str__(self):
         return f"{self.company}"
 
-class Profile(models.Model):
+class WorkProfile(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
-   first = models.CharField(max_length=20, blank=True)
-   last = models.CharField(max_length=20, blank=True)
+   name = models.CharField(max_length=20, blank=True)
    bio = models.CharField(blank=True, max_length=2000)
-   birthdate = models.DateField(blank=True)
    education = models.ManyToManyField(Education, related_name="education", blank=True)
    skills = models.ManyToManyField(Skill, related_name="skills", blank=True)
    work = models.ManyToManyField(Work, related_name="work", blank=True)
@@ -45,7 +42,7 @@ class Profile(models.Model):
    friends = models.ManyToManyField(User, related_name="friends", blank=True)
 #  displayPic = models.ImageField(upload_to='displayPics', blank=True)
    def __str__(self):
-       return f"{self.first} {self.last}"
+       return f"{self.name}"
 
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)

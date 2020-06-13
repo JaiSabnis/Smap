@@ -18,16 +18,32 @@
   font-family: stroker;
   src: url("JamesStroker-jEZMO.ttf");
 }
+.welcome {
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bolder;
+  font-size: 10vw;
+  padding-top: 10%;
+  text-shadow: 5px 5px #bd945f;
+}
+body {
+  text-align: center;
+  font-family: kiss, sans-serif;
+  background-color: whitesmoke;
+  color: black;
+  
+}
+
 
 
 /* FOR WIDER SCREENS */
 @media screen and (min-width: 600px) {
   .displayPic{
+    margin-top: 5%;
     border-radius: 50%;
     width: 40%;
     height: 40%;
   }
-  
   .proIntro {
     color: rgb(31, 29, 29);
     font-family: vanity, sans-serif;
@@ -42,7 +58,6 @@
     width: 90%;
     height: 70%;
   }
-  
   .proIntro {
     color: rgb(31, 29, 29);
     font-family: vanity, sans-serif;
@@ -52,11 +67,63 @@
 
 
 
-body {
+
+
+/* Input fields */
+.proIntroField{
+  background-color: transparent;
+  border: thin;
+  border-color: black;
   text-align: center;
-  font-family: kiss, sans-serif;
-  background-color: whitesmoke;
-  color: black;
+  justify-content: center;
+  font-size: 13vw;
+  color: rgb(31, 29, 29);
+  font-family: vanity, sans-serif;
+}
+
+.transFieldBig{
+  background-color: transparent;
+  border: thin;
+  border-color: black;
+  text-align: center;
+  justify-content: center;
+  font-size: 7vw;
+   
+}
+
+.greenHigh{
+background-color: greenyellow ;
+
+
+}
+  /* define values in pixels / Percentage or em. whatever suits 
+     your requirements */
+
+.transFieldMedium{
+  background-color: transparent;
+  border: thin;
+  border-color: black;
+  text-align: center;
+  font-size: 5vw;
+  max-width: unset;
+ 
+}
+
+.transFieldSmall{
+  background-color: transparent;
+  border: thin;
+  border-color: black;
+  text-align: center;
+  font-size: 4vw;
+  max-width: unset;
+ 
+}
+
+#textBox{
+  display: block; 
+  overflow: hidden; 
+  resize: none;
+  
 }
 
 .inputBox {
@@ -85,6 +152,8 @@ section {
   scroll-behavior: smooth; /* <----- THE SECRET ---- */
 }
 
+
+/* Buttons */
 .loginButton {
   cursor: pointer;
   border-radius: 5em;
@@ -119,15 +188,7 @@ section {
 }
 
 
-
-.welcome {
-  color: white;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: bolder;
-  font-size: 10vw;
-  padding-top: 10%;
-  text-shadow: 5px 5px #bd945f;
-}
+/* Containers */
 
 .orgBox {
   background-image: url("images/org.jpg");
@@ -145,7 +206,12 @@ section {
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
-/* Containers */
+
+
+
+
+
+
 .login-container {
   margin: 80px auto;
   height: 550px;
