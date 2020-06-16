@@ -1,71 +1,95 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
-from .models import WorkProfile, Activity, Education, Work, Project
+from .models import Profile, Category, Education, Work, Post
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
 
-
-
-def workPro(request):        
+def profile(request):        
     if request.method == 'POST':
-        name = request.POST["name"]
-        bioData = request.POST["bio"]
-        workProfile = WorkProfile(user=request.user, name=name, bio=bioData)
-        workProfile.save()
-
-        schools = request.POST.getlist('school')
-        degrees = request.POST.getlist('degree')
-        fields = request.POST.getlist('field')
-        eduAbouts = request.POST.getlist('eduAbout')
-
-        for i in range(len(schools)):
-            edu = Education(school=schools[i], degree=degrees[i], field=fields[i], about=eduAbouts[i])
-            edu.save()
-            workProfile.education.add(edu)
-
-        companys = request.POST.getlist('company')
-        jobTitles = request.POST.getlist('job')
-        workAbouts = request.POST.getlist('workAbout')
-
-        for i in range(len(companys)):
-            work = Work(company=companys[i], title=jobTitles[i], about=workAbouts[i])
-            work.save()
-            workProfile.work.add(work)
-
-        projectTitles = request.POST.getlist('projectTitle')
-        shortAbouts = request.POST.getlist('shortAbout')
-        longAbouts = request.POST.getlist('longAbout')
-
-        for i in range(len(projectTitles)):
-            project = Project(title=projectTitles[i], shortAbout=shortAbouts[i], longAbout=longAbouts[i])
-            project.save()
-            workProfile.projects.add(project)
-
-        context={
+        if 'postSubmit' in request.POST:
+            shortAbout = request.POST["shortAbout"]
+            title = request.POST["title"]
+            longAbout = request.POST["longAbout"]
+            post = Post(shortAbout=shortAbout, title=title, longAbout=longAbout)
+            post.save()
+            try:
+                profile = Profile.objects.get(user_id=request.user.id)
+                profile.posts.add(post)
+            except Profile.DoesNotExist:
+                profile = Profile(user=request.user)
+                profile.save()  
+                profile.posts.add(post)
+            context={
             "user": request.user,
-            "profile": workProfile,
-            "educations": workProfile.education.all(),
-            "works": workProfile.work.all(),
-        }    
-        return render(request, "flights/workPro.html", context)    
+            "profile": profile,
+            "posts": profile.posts.all(),  
+            "categorys": profile.categorys.all()}
+            return render(request, "flights/webspace.html", context) 
 
-    
+        if 'catSubmit' in request.POST:
+            about = request.POST["catAbout"]
+            title = request.POST["catTitle"]
+            cat = Category(about=about, title=title)
+            cat.save()
+            try:
+                profile = Profile.objects.get(user_id=request.user.id)
+                profile.categorys.add(cat)
+            except Profile.DoesNotExist:
+                profile = Profile(user=request.user)
+                profile.save()  
+                profile.categorys.add(cat)
+            context={
+            "user": request.user,
+            "profile": profile,
+            "posts": profile.posts.all(),
+            "categorys": profile.categorys.all()}
+            return render(request, "flights/webspace.html", context) 
+
+        if 'catPost' in request.POST:
+            catId = request.POST["category"]
+            shortAbout = request.POST["postShortAbout"]
+            title = request.POST["postTitle"]
+            longAbout = request.POST["postLongAbout"]
+            post = Post(shortAbout=shortAbout, title=title, longAbout=longAbout)
+            post.save()
+
+            profile = Profile.objects.get(user_id=request.user.id)
+            category = profile.categorys.get(id=catId)
+            category.posts.add(post)
+            category.title = post.title
+            category.save()
+           
+            context={
+            "user": request.user,
+            "profile": profile,
+            "posts": profile.posts.all(),  
+            "categorys": profile.categorys.all()}
+            return render(request, "flights/webspace.html", context)
+
+
     if request.method == 'GET':
         try:
-            workProfile = WorkProfile.objects.get(user_id=request.user.id)
-        except WorkProfile.DoesNotExist:
-            return render(request, "flights/workProCreate.html")
+            profile = Profile.objects.get(user_id=request.user.id)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            profile.save()        
         context={
             "user": request.user,
-            "profile": workProfile,
-            "educations": workProfile.education.all(),
-            "works": workProfile.work.all(),
-            "projects": workProfile.projects.all(),
-        }    
-        return render(request, "flights/workPro.html", context)    
+            "profile": profile,
+            "posts": profile.posts.all(),
+            "categorys": profile.categorys.all()
+            }
+        return render(request, "flights/webspace.html", context)   
+
+
+
+def postCreate(request):
+    if request.method == 'GET':
+        return render(request, "flights/postCreate.html")
+
 
     
 

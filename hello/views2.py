@@ -13,6 +13,62 @@ from django.db import IntegrityError
 # Acitvity
 
 
+        name = request.POST["name"]
+        bioData = request.POST["bio"]
+        workProfile = Profile(user=request.user, name=name, bio=bioData)
+        workProfile.save()
+
+        schools = request.POST.getlist('school')
+        degrees = request.POST.getlist('degree')
+        fields = request.POST.getlist('field')
+        eduAbouts = request.POST.getlist('eduAbout')
+
+        for i in range(len(schools)):
+            edu = Education(school=schools[i], degree=degrees[i], field=fields[i], about=eduAbouts[i])
+            edu.save()
+            workProfile.education.add(edu)
+
+        companys = request.POST.getlist('company')
+        jobTitles = request.POST.getlist('job')
+        workAbouts = request.POST.getlist('workAbout')
+
+        for i in range(len(companys)):
+            work = Work(company=companys[i], title=jobTitles[i], about=workAbouts[i])
+            work.save()
+            workProfile.work.add(work)
+
+        projectTitles = request.POST.getlist('projectTitle')
+        shortAbouts = request.POST.getlist('shortAbout')
+        longAbouts = request.POST.getlist('longAbout')
+
+        for i in range(len(projectTitles)):
+            project = Project(title=projectTitles[i], shortAbout=shortAbouts[i], longAbout=longAbouts[i])
+            project.save()
+            workProfile.projects.add(project)
+
+        context={
+            "user": request.user,
+            "profile": workProfile,
+            "educations": workProfile.education.all(),
+            "works": workProfile.work.all(),
+        }    
+        return render(request, "flights/workPro.html", context)    
+
+    
+    if request.method == 'GET':
+        try:
+            workProfile = Profile.objects.get(user_id=request.user.id)
+        except Profile.DoesNotExist:
+            return render(request, "flights/workProCreate.html")
+        context={
+            "user": request.user,
+            "profile": workProfile,
+            "educations": workProfile.education.all(),
+            "works": workProfile.work.all(),
+            "projects": workProfile.projects.all(),
+        }    
+        return render(request, "flights/workPro.html", context)   
+
 
 
 ## Portfolio

@@ -30,28 +30,44 @@ class Work(models.Model):
     def __str__(self):
         return f"{self.company}"
 
-class WorkProfile(models.Model):
+
+class Post(models.Model):
+    title = models.CharField(max_length=100, null=True, blank=False)
+    shortAbout = models.CharField(max_length=200, null=True, blank=True)
+    longAbout = models.CharField(max_length=1000, null=True, blank=True)
+    def __str__(self):
+        return f"{self.title}"
+
+class Category(models.Model):
+    title = models.CharField(max_length=25, blank=False)
+    about = models.CharField(max_length=2000, blank=False)
+    posts = models.ManyToManyField(Post, related_name="posts", blank=True)
+
+    def __str__(self):
+        return f"{self.title}" 
+
+
+class Profile(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
-   name = models.CharField(max_length=20, blank=True)
-   bio = models.CharField(blank=True, max_length=2000)
+   name = models.CharField(max_length=20,  null=True, blank=True)
+   bio = models.CharField(blank=True, max_length=2000, null=True)
+
+   #Old shiz
    education = models.ManyToManyField(Education, related_name="education", blank=True)
    skills = models.ManyToManyField(Skill, related_name="skills", blank=True)
    work = models.ManyToManyField(Work, related_name="work", blank=True)
    projects = models.ManyToManyField(Project, related_name="projects", blank=True)
    friendRequests = models.ManyToManyField(User, related_name="friendRequests", blank=True)
    friends = models.ManyToManyField(User, related_name="friends", blank=True)
-#  displayPic = models.ImageField(upload_to='displayPics', blank=True)
+
+   posts = models.ManyToManyField(Post, related_name="homePosts",  blank=True)
+   categorys = models.ManyToManyField(Category, related_name="categorys", blank=True)
+
+
    def __str__(self):
        return f"{self.name}"
 
-class Activity(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    title = models.CharField(max_length=25, blank=False)
-    caption = models.CharField(max_length=2000, blank=False)
-    likes = models.IntegerField(default=0)
 
-    def __str__(self):
-        return f"{self.title}" 
 
 
 
